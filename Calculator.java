@@ -27,5 +27,6 @@ public class Calculator {
                 System.out.println("Enter the valid operation");
                 break;
         }
+        sc.close();
     }
 }

@@ -8,6 +8,7 @@ public class CheckThePrimeNo_2 {
         int number = sc.nextInt();
         if (number == 2) {
             System.out.println("Number is Prime");
+            sc.close();
             return;
         }
         for (int i = 2; i <= Math.sqrt(number); i++) { // Optimised code loop will run under root n times
@@ -20,5 +21,6 @@ public class CheckThePrimeNo_2 {
         } else {
             System.out.println("Number is not Prime");
         }
+        sc.close();
     }
 }

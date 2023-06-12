@@ -12,5 +12,6 @@ public class BreakFormLoop {
             System.out.println("The Number is" + number);
         }
         System.out.println("You are Out of Loop");
+        sc.close();
     }
 }

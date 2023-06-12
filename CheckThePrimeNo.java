@@ -17,7 +17,7 @@ public class CheckThePrimeNo {
                 }
             }
         }
-
+        sc.close();
     }
 
 }
