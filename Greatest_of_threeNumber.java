@@ -12,6 +12,6 @@ public class Greatest_of_threeNumber {
         } else {
             System.out.println("C is greatest");
         }
-
+        sc.close();
     }
 }

@@ -6,10 +6,12 @@ public class ContinueKeyword {
         while (true) {
             System.out.print("Enter the number :");
             int number = sc.nextInt();
+            sc.close();
             if (number % 10 == 0) {
                 continue;
             }
             System.out.println("The Number is " + number);
         }
+
     }
 }
