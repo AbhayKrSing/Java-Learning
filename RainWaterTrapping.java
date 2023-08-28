@@ -50,15 +50,15 @@ public class RainWaterTrapping {
         int rainWaterTrapped = 0;
         int widthofbar = 1;
         int n = height.length;
-        // 1st auxiliary array for rightside maximum bar height.
-        int firstauxiliaryArray[] = new int[n];
-        int secondauxiliaryArray[] = new int[n];
+        // 2nd auxiliary array for rightside maximum bar height.
+        int firstauxiliaryArray[] = new int[n]; // left
+        int secondauxiliaryArray[] = new int[n]; // right
         firstauxiliaryArray[0] = height[0];
         secondauxiliaryArray[n - 1] = height[n - 1];
         for (int i = 1; i < n; i++) {
             firstauxiliaryArray[i] = Math.max(firstauxiliaryArray[i - 1], height[i]);
         }
-        // 2nd auxiliary array for leftside maximum bar height.
+        // 1st auxiliary array for leftside maximum bar height.
         for (int i = n - 2; i >= 0; i--) {
             secondauxiliaryArray[i] = Math.max(secondauxiliaryArray[i + 1], height[i]);
         }
