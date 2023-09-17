@@ -1,6 +1,4 @@
-/**
- * problem1
- */
+
 public class problem1 {
     public static void main(String[] args) {
         int[][] array = { { 4, 7, 8 }, { 8, 8, 7 } };

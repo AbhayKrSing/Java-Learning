@@ -1,4 +1,3 @@
-package Sorting;
 
 public class SelectionSort {
     // public static void SelectionSorting(int[] arr) { // This code snippet needs

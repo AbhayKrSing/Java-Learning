@@ -1,4 +1,3 @@
-package Sorting;
 
 public class BubbleSort {
     public static void BubbleSorting(int arr[]) { // Its time complexity is always O(n^2) even for the best case,that is

@@ -1,4 +1,3 @@
-package Sorting;
 
 public class InsertionSort {
     // 1. Abhay's code
