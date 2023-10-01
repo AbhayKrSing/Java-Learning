@@ -25,5 +25,6 @@ public class PrintALLPrime_IN_a_Range {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
         PrintPrimeInRange(n);
+        sc.close();
     }
 }

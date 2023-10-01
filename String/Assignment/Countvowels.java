@@ -18,5 +18,6 @@ public class Countvowels {
         Scanner sc = new Scanner(System.in);
         String str = sc.nextLine();
         Countlowercasevowels(str);
+        sc.close();
     }
 }

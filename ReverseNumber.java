@@ -13,6 +13,7 @@ public class ReverseNumber {
             n /= 10;
         }
         System.out.println(reverseNumber);
+        sc.close();
     }
 
 }

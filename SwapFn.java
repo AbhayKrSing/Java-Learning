@@ -24,5 +24,6 @@ public class SwapFn {
         System.out.print(a + " ");
         System.out.println(b);
         System.out.println("clearly value of a and b not changed inside main fn due to call by value mechanism");
+        sc.close();
     }
 }

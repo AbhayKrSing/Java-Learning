@@ -12,5 +12,6 @@ public class Sum_of_NaturalNo {
             i++;
         }
         System.out.println("Sum is :" + sum);
+        sc.close();
     }
 }

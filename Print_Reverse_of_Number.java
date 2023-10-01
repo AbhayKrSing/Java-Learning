@@ -10,5 +10,6 @@ public class Print_Reverse_of_Number {
             System.out.print(n % 10);
             System.out.print(' ');
         }
+        sc.close();
     }
 }

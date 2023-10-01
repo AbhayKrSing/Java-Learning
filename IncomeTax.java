@@ -19,6 +19,8 @@ public class IncomeTax {
             System.out.print("tax is : ");
             System.out.println(tax);
         }
+        sc.close();
+
     }
 
 }

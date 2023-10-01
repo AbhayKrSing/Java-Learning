@@ -1,4 +1,3 @@
-package BitManipulationPractice_set;
 
 public class Swap_bw_two_without_using_third_variable {
     public static void main(String[] args) {

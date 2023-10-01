@@ -31,6 +31,8 @@ public class Leap_year {
         } else {
             System.out.println("Not a leap year");
         }
+        sc.close();
+
     }
     // More optimised and easy code is on notes
 }

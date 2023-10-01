@@ -21,6 +21,7 @@ public class print_number {
             System.out.print(' ');
             i++;
         }
+        sc.close();
 
     }
 }
