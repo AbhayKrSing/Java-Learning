@@ -5,8 +5,8 @@ public class javaQuiz {
         // System.out.println('a');
         // count++;
         // } while (count < 5);
-        if (1 + 1 + 1 + 1 == 4) {
-            System.out.println('a');
-        }
+        // if (1 + 1 + 1 + 1 == 4) {
+        // System.out.println('a');
+        // }
     }
 }
