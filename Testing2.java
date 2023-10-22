@@ -1,17 +1,28 @@
+
 public class Testing2 {
-    public static void main(String[] args) {
-        Test t = new Test();
-        System.out.println(Test.marks);
-        t.set_marks(89);
-        System.out.println(Test.marks);
+    static int count = 1;
+
+    // public static void printIncreasingOrder(int n) { //wrong approach this is not
+    // recursion ,this is stupidity.
+    // if (n == 1) {
+    // System.out.println(count);
+    // return;
+    // }
+    // System.out.println(count);
+    // count++;
+    // printIncreasingOrder(n - 1);
+    // }
+    public static void printIncreasingOrder(int n) {
+        if (n == 1) {
+            System.out.print(n + " ");
+            return;
+        }
+        printIncreasingOrder(n - 1);
+        System.out.print(n + " ");
     }
 
-}
-
-class Test {
-    static int marks;
-
-    void set_marks(int marks) {
-        this.marks = marks;
+    public static void main(String[] args) {
+        int n = 10;
+        printIncreasingOrder(n);
     }
 }
