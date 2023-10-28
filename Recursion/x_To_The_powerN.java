@@ -10,6 +10,6 @@ public class x_To_The_powerN {
     }
 
     public static void main(String[] args) {
-        System.out.println(getpower(2, 10));
+        System.out.println(getpower(2, 5));
     }
 }
