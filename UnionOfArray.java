@@ -1,5 +1,5 @@
 
-public class Testing {
+public class UnionOfArray {
     public static void printarray(int arr[]) {
         for (int i = 0; i < arr.length; i++) {
             System.out.print(arr[i] + " ");
@@ -37,6 +37,7 @@ public class Testing {
                 }
             }
         }
+        // if either i exceeds or j exceeds from their respective array
         if (i < a.length) {
             for (int l = i; l < a.length; l++) {
                 if (a[l] > arr[k]) {
@@ -58,7 +59,7 @@ public class Testing {
 
     public static void main(String[] args) {
         int a[] = { 1, 2, 3, 4, 6 };
-        int b[] = { 2, 3, 5 };
+        int b[] = { 2, 3, 5, 9 };
         sortedArray(a, b);
     }
 
