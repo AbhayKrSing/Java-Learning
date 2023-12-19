@@ -1,4 +1,3 @@
-
 public class Testing {
     public static void printarray(int arr[]) {
         for (int i = 0; i < arr.length; i++) {
@@ -6,60 +5,20 @@ public class Testing {
         }
     }
 
-    public static void sortedArray(int[] a, int[] b) {
-        int i = 0;
-        int j = 0;
-        int k = 0;
-        int arr[] = new int[a.length + b.length];
-        if (a[0] <= b[0]) { // for 1st element
-            arr[0] = a[0];
-            i++;
-        } else {
-            arr[0] = b[0];
-            j++;
+    public static void reverse(int[] arr, int i, int j) {
+        if (j <= i) {
+            return;
         }
-        while (i < a.length && j < b.length) {
-            if (a[i] <= b[j]) {
-                if (arr[k] < a[i]) {
-                    k++;
-                    arr[k] = a[i];
-                    i++;
-                } else {
-                    i++;
-                }
-            } else {
-                if (arr[k] < b[j]) {
-                    k++;
-                    arr[k] = b[j];
-                    j++;
-                } else {
-                    j++;
-                }
-            }
-        }
-        if (i < a.length) {
-            for (int l = i; l < a.length; l++) {
-                if (a[l] > arr[k]) {
-                    k++;
-                    arr[k] = a[l];
-                }
-            }
-        } else {
-            for (int l = j; l < b.length; l++) {
-                if (b[l] > arr[k]) {
-                    k++;
-                    arr[k] = b[l];
-                }
-            }
-        }
-        printarray(arr);
-
+        // swapping
+        int temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+        reverse(arr, i + 1, j - 1);
     }
 
     public static void main(String[] args) {
-        int a[] = { 1, 2, 3, 4, 6 };
-        int b[] = { 2, 3, 5 };
-        sortedArray(a, b);
+        int[] nums = { 1, 2, 3, 4, 5 };
+        reverse(nums, 0, nums.length - 1);
+        printarray(nums);
     }
-
 }

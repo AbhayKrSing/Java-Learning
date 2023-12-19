@@ -1,28 +1,35 @@
-
 public class Testing2 {
-    static int count = 1;
-
-    // public static void printIncreasingOrder(int n) { //wrong approach this is not
-    // recursion ,this is stupidity.
-    // if (n == 1) {
-    // System.out.println(count);
-    // return;
-    // }
-    // System.out.println(count);
-    // count++;
-    // printIncreasingOrder(n - 1);
-    // }
-    public static void printIncreasingOrder(int n) {
-        if (n == 1) {
-            System.out.print(n + " ");
-            return;
+    public static void printArry(int[] nums, int si, int ei) {
+        for (int i = si; i < ei + 1; i++) {
+            System.out.print(nums[i] + " ");
         }
-        printIncreasingOrder(n - 1);
-        System.out.print(n + " ");
+        System.out.println();
+    }
+
+    public static int maxSubArray(int[] nums) {
+        int cs = 0;
+        int start = -1;
+        int end = -1;
+        int maxSum = Integer.MIN_VALUE;
+        for (int i = 0; i < nums.length; i++) {
+            if (cs == 0) {
+                start = i;
+            }
+            cs += nums[i];
+            if (cs > maxSum) {
+                maxSum = cs;
+                end = i;
+            }
+            if (cs < 0) {
+                cs = 0;
+            }
+        }
+        printArry(nums, start, end);
+        return maxSum;
     }
 
     public static void main(String[] args) {
-        int n = 10;
-        printIncreasingOrder(n);
+        int nums[] = { -2, -3, 4, -1, -2, 1, 5, -3 };
+        System.out.println(maxSubArray(nums));
     }
 }
