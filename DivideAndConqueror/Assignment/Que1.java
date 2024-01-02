@@ -1,6 +1,6 @@
-import java.util.Arrays;
+package DivideAndConqueror.Assignment;
 
-public class Testing2 {
+public class Que1 {
     public static void printArray(String[] arr) {
         for (int i = 0; i < arr.length; i++) {
             System.out.print(arr[i] + " ");
