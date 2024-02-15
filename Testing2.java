@@ -1,44 +1,53 @@
-import java.util.ArrayList;
-import java.util.List;
 
 public class Testing2 {
-    public static List<Integer> spiralOrder(int[][] matrix) {
-        ArrayList<Integer> arr = new ArrayList<Integer>();
-        int sr = 0;
-        int sc = 0;
-        int ec = matrix[0].length - 1;
-        int er = matrix.length - 1;
+    public static void printArray(int arr[]) {
+        for (int i = 0; i < arr.length; i++) {
+            System.out.print(arr[i] + " ");
+        }
+        System.out.println();
+    }
 
-        while (sr <= er && sc <= ec) {
-            // top
-            for (int i = sc; i < ec; i++) {
-                arr.add(matrix[sr][i]);
-            }
-            // right
-            for (int i = sr; i < er; i++) {
-                arr.add(matrix[i][ec]);
-            }
-            // bottom
-            for (int i = ec; i > sc; i--) {
-                arr.add(matrix[er][i]);
-            }
-            // left
-            for (int i = er; i > sr; i--) {
-                arr.add(matrix[i][sc]);
-            }
-            sr++;
-            sc++;
-            er--;
-            ec--;
-            if (sr == er && sc == ec) {
-                arr.add(matrix[sr][ec]);
+    public static void nextPermutation(int[] nums) {
+        // finding breakPoint
+        int bp = -1;
+        // k variable for reversing last step
+        int k = nums.length - 1;
+        for (int i = nums.length - 2; i >= 0; i--) {
+            if (nums[i] < nums[i + 1]) { // breakpoint
+                bp = i;
+                break;
             }
         }
-        return arr;
+        if (bp == -1) { // for no break point
+            for (int i = 0; i < nums.length / 2; i++) {
+                int temp = nums[i];
+                nums[i] = nums[nums.length - i - 1];
+                nums[nums.length - i - 1] = temp;
+            }
+            return;
+        }
+        for (int j = nums.length - 1; j >= 0; j--) {
+            if (nums[j] > nums[bp]) {
+                // swap
+                int temp = nums[bp];
+                nums[bp] = nums[j];
+                nums[j] = temp;
+                break;
+            }
+        }
+        // reversing
+        for (int i = bp + 1; i <= (nums.length + bp) / 2; i++) {
+            int temp = nums[i];
+            nums[i] = nums[k];
+            nums[k] = temp;
+            k--;
+        }
+
     }
 
     public static void main(String[] args) {
-        int nums[][] = { { 1, 2, 3, 4 }, { 5, 6, 7, 8 }, { 9, 10, 11, 12 } };
-
+        int nums[] = { 1, 3, 2 };
+        nextPermutation(nums);
+        printArray(nums);
     }
 }
