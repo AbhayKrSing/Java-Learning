@@ -1,6 +1,8 @@
 package backTracking;
 
-public class NQueen {
+public class NQueen2 {
+    static int count = 0; // for counting ways
+
     public static void print(char board[][]) {
         System.out.println("---chessboard---");
         for (int i = 0; i < board.length; i++) {
@@ -36,7 +38,9 @@ public class NQueen {
     public static void Nqueens(char[][] board, int row) {
         // base case
         if (row == board.length) {
-            print(board);
+            // print(board);
+            // Instead print we will use count here
+            count++;
             return;
         }
 
@@ -44,15 +48,15 @@ public class NQueen {
         for (int i = 0; i < board[0].length; i++) {
             if (isSafe(board, row, i)) {
                 board[row][i] = 'Q';
-                Nqueens(board, row + 1); // Recursive call
-                board[row][i] = 'X'; // backtracking steps
+                Nqueens(board, row + 1);
+                board[row][i] = 'X';
             }
         }
 
     }
 
     public static void main(String[] args) {
-        int n = 2;
+        int n = 4;
         char board[][] = new char[n][n];
         // intialize
         for (int i = 0; i < board.length; i++) {
@@ -61,5 +65,6 @@ public class NQueen {
             }
         }
         Nqueens(board, 0);
+        System.out.println("Total ways to solve n queens : " + count);
     }
 }

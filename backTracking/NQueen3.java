@@ -1,6 +1,6 @@
 package backTracking;
 
-public class NQueen {
+public class NQueen3 {
     public static void print(char board[][]) {
         System.out.println("---chessboard---");
         for (int i = 0; i < board.length; i++) {
@@ -33,33 +33,39 @@ public class NQueen {
         return true;
     }
 
-    public static void Nqueens(char[][] board, int row) {
+    public static boolean Nqueens(char[][] board, int row) {
         // base case
-        if (row == board.length) {
+        if (row == board.length) { // yaha pe pahucha mtlb soln exists karta hai.
             print(board);
-            return;
+            return true;
         }
 
         // kaam and fn call
         for (int i = 0; i < board[0].length; i++) {
             if (isSafe(board, row, i)) {
                 board[row][i] = 'Q';
-                Nqueens(board, row + 1); // Recursive call
-                board[row][i] = 'X'; // backtracking steps
+                if (Nqueens(board, row + 1)) {
+                    return true;
+                }
+
+                board[row][i] = 'X';
             }
         }
-
+        return false;
     }
 
     public static void main(String[] args) {
-        int n = 2;
+        int n = 4;
         char board[][] = new char[n][n];
-        // intialize
+        // Intialize
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[0].length; j++) {
                 board[i][j] = 'X';
             }
         }
-        Nqueens(board, 0);
+        if (!Nqueens(board, 0)) {
+            System.out.println("Soln not exists");
+        }
+
     }
 }
