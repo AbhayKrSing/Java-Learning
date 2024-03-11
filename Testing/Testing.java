@@ -1,51 +1,44 @@
 package Testing;
 
+/**
+ * Testing
+ */
 public class Testing {
-    static int N = 8;
-
-    public static void printSolution(int sol[][]) {
-        for (int x = 0; x < N; x++) {
-            for (int y = 0; y < N; y++)
-                System.out.print(sol[x][y] + " ");
-            System.out.println();
+    public static boolean pair2SumInSortedAndRotated(int nums[], int target) {
+        int left = -1;
+        int right = -1;
+        // get pivot point
+        for (int i = 1; i < nums.length; i++) {
+            if (nums[i - 1] > nums[i]) {
+                left = i;
+                right = i - 1;
+            }
         }
-    }
-
-    public static boolean solveKTUtil(int x, int y, int movei, int sol[][]) {
-        if (movei == N * N) {
-            return true;
-        }
-        int xMove[] = { 2, 1, -1, -2, -2, -1, 1, 2 };
-        int yMove[] = { 1, 2, 2, 1, -1, -2, -2, -1 };
-        for (int k = 0; k < 8; k++) {
-            int next_x = x + xMove[k];
-            int next_y = y + yMove[k];
-            if (next_y >= 0 && next_y < sol.length && next_x >= 0 && next_x < sol.length
-                    && sol[next_x][next_y] == -1) {
-                sol[next_x][next_y] = movei;
-                if (solveKTUtil(next_x, next_y, movei + 1, sol)) {
-                    return true;
+        while (left != right) {
+            if (nums[left] + nums[right] > target) {
+                if (right == 0) {
+                    right = nums.length - 1;
+                } else {
+                    right--;
                 }
-                sol[next_x][next_y] = -1; // backtracking
+
+            } else if (nums[left] + nums[right] < target) {
+                if (left == nums.length - 1) {
+                    left = 0;
+                } else {
+                    left++;
+                }
+            } else {
+                return true;
             }
         }
         return false;
     }
 
-    public static void main(String args[]) {
-        int sol[][] = new int[8][8];
-        for (int x = 0; x < N; x++) {
-            for (int y = 0; y < N; y++) {
-                sol[x][y] = -1;
-            }
-        }
-
-        // As the Knight starts from cell(0,0)
-        sol[0][0] = 0;
-        if (solveKTUtil(0, 0, 1, sol)) {
-            printSolution(sol);
-        } else
-            System.out.println("Solution does not exist");
-
+    public static void main(String[] args) {
+        int nums[] = { 11, 15, 6, 8, 9, 10 };
+        int target = 16;
+        System.out.println(pair2SumInSortedAndRotated(nums, target));
+        ;
     }
 }

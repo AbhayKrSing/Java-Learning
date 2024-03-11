@@ -1,53 +1,50 @@
+import java.util.*;
 
 public class Testing2 {
-    public static void printArray(int arr[]) {
-        for (int i = 0; i < arr.length; i++) {
-            System.out.print(arr[i] + " ");
+    public static void print2dArray(int array[][]) {
+        for (int i = 0; i < array.length; i++) {
+            for (int j = 0; j < array[0].length; j++) {
+                System.out.print(array[i][j] + " ");
+            }
+            System.out.println();
         }
-        System.out.println();
     }
 
-    public static void nextPermutation(int[] nums) {
-        // finding breakPoint
-        int bp = -1;
-        // k variable for reversing last step
-        int k = nums.length - 1;
-        for (int i = nums.length - 2; i >= 0; i--) {
-            if (nums[i] < nums[i + 1]) { // breakpoint
-                bp = i;
-                break;
+    public static int[][] merge(int[][] intervals) {
+        List<List<Integer>> mainlist = new ArrayList<>();
+        Arrays.sort(intervals, new Comparator<int[]>() {
+            public int compare(int[] a, int[] b) {
+                return a[0] - b[0];
             }
-        }
-        if (bp == -1) { // for no break point
-            for (int i = 0; i < nums.length / 2; i++) {
-                int temp = nums[i];
-                nums[i] = nums[nums.length - i - 1];
-                nums[nums.length - i - 1] = temp;
+        });
+        for (int i = 0; i < intervals.length; i++) {
+            if (!mainlist.isEmpty() && mainlist.get(mainlist.size() - 1).get(1) >= intervals[i][0]) {
+                int set = Math.max(intervals[i][1], mainlist.get(mainlist.size() - 1).get(1));
+                List<Integer> lst = mainlist.get(mainlist.size() - 1);
+                lst.set(1, set);
+                mainlist.set(mainlist.size() - 1, lst);
+            } else {
+                mainlist.add(Arrays.asList(intervals[i][0], intervals[i][1]));
             }
-            return;
-        }
-        for (int j = nums.length - 1; j >= 0; j--) {
-            if (nums[j] > nums[bp]) {
-                // swap
-                int temp = nums[bp];
-                nums[bp] = nums[j];
-                nums[j] = temp;
-                break;
-            }
-        }
-        // reversing
-        for (int i = bp + 1; i <= (nums.length + bp) / 2; i++) {
-            int temp = nums[i];
-            nums[i] = nums[k];
-            nums[k] = temp;
-            k--;
-        }
 
+        }
+        System.out.println(mainlist);
+        int[][] result = new int[mainlist.size()][2];
+        for (int i = 0; i < mainlist.size(); i++) {
+            List<Integer> sublist = mainlist.get(i);
+            for (int j = 0; j < sublist.size(); j++) {
+                result[i][j] = sublist.get(j);
+            }
+        }
+        return result;
     }
 
     public static void main(String[] args) {
-        int nums[] = { 1, 3, 2 };
-        nextPermutation(nums);
-        printArray(nums);
+        // int[][] n = { { 1, 3 }, { 2, 6 }, { 8, 10 }, { 15, 18 } };
+        // int[][] n = { { 1, 4 }, { 4, 5 } };
+        // int[][] n = { { 1, 3 } };
+        int[][] n = { { 1, 4 }, { 0, 2 }, { 3, 5 } };
+        print2dArray(merge(n));
     }
+
 }

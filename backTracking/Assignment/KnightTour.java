@@ -26,7 +26,7 @@ public class KnightTour {
                 if (getorder(grid, nextrow, nextcol, i + 1)) {
                     return true;
                 }
-                grid[nextrow][nextcol] = -1;
+                grid[nextrow][nextcol] = -1; // backtracking
             }
         }
         return false;
