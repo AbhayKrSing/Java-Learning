@@ -1,51 +1,74 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
 
 public class Testing {
-    public static void print2dArray(int[][] arr) {
-        for (int i = 0; i < arr.length; i++) {
-            for (int j = 0; j < arr[0].length; j++) {
-                System.out.print(arr[i][j] + " ");
+    static long count = 0;
+
+    static void merge(long arr[], int start, int mid, int end) {
+        long temp[] = new long[end - start + 1];
+        int fp = start;
+        int sp = mid + 1;
+        int k = 0;
+        while (fp <= mid && sp <= end) {
+            if (arr[fp] < arr[sp]) {
+                temp[k] = arr[fp];
+                fp++;
+            } else {
+                temp[k] = arr[sp];
+                sp++;
             }
-            System.out.println();
+            k++;
+        }
+        // filling out left elements
+        while (fp <= mid) {
+            temp[k] = arr[fp];
+            fp++;
+            k++;
+        }
+        while (sp <= end) {
+            temp[k] = arr[sp];
+            sp++;
+            k++;
+        }
+
+        // replacing temp[] value to original array
+        for (int i = 0, j = start; j <= end && i < temp.length; i++, j++) {
+            arr[j] = temp[i];
         }
     }
 
-    public static int[][] merge(int[][] intervals) {
-        int[][] ans = new int[intervals.length][intervals[0].length];
-        Arrays.sort(intervals, new Comparator<int[]>() {
-            public int compare(int[] a, int[] b) {
-                return a[0] - b[0];
-            }
-        });
-        for (int i = 0; i < intervals.length; i++) {
-            if (i == intervals.length - 1 && intervals[i][1] < ans[i - 1][1]) { // check
-                continue;
-            }
-            ans[i] = intervals[i];
-
-            for (int j = i + 1; j < intervals.length; j++) { // for merging
-                // getting end of selected interval
-                int endOfSelectedInterval = ans[i][1];
-                // check if end of selectedInterval is greater than currentInterval Start
-                int StartOfcurrentInterval = intervals[j][0];
-                if (endOfSelectedInterval > StartOfcurrentInterval) {
-                    int newvalue = Math.max(endOfSelectedInterval, intervals[j][1]); // endOfSelectedInterval,endOfcurrentInterval
-                    ans[i][1] = newvalue;
-                } else {
-                    i = j - 1;
-                    break;
-                }
-
+    static void counting(long arr[], int start, int mid, int end) {
+        int s1 = start;
+        int s2 = mid + 1;
+        while (s1 <= mid && s2 <= end) {
+            if (arr[s1] > arr[s2]) {
+                count += (mid - s1 + 1);
+                s2++;
+            } else {
+                s1++;
             }
         }
-        return ans;
+
+    }
+
+    static void GetInversion(long arr[], int start, int end) {
+        // base case
+        if (start >= end) {
+            return;
+        }
+        // fn call and kaam
+        int mid = (start + end) / 2;
+        GetInversion(arr, start, mid);
+        GetInversion(arr, mid + 1, end);
+
+        counting(arr, start, mid, end);
+
+        merge(arr, start, mid, end); // merge and sort
 
     }
 
     public static void main(String[] args) {
-        int[][] n = { { 1, 3 }, { 2, 4 }, { 2, 6 }, { 8, 9 }, { 8, 10 }, { 9, 11 }, { 15, 18 }, { 16, 17 } };
-        print2dArray(merge(n));
+        long arr[] = { 84, 2, 37, 3, 67, 82, 19, 97, 91, 63, 27, 6, 13, 90, 63, 89, 100, 60, 47, 96, 54, 26, 64, 50, 71,
+                16, 6, 40, 84, 93, 67, 85, 16, 22, 60 };
+        GetInversion(arr, 0, arr.length - 1);
+        System.out.println(count);
     }
 }

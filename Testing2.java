@@ -1,50 +1,69 @@
-import java.util.*;
+class Testing2 {
+    static int count = 0;
 
-public class Testing2 {
-    public static void print2dArray(int array[][]) {
-        for (int i = 0; i < array.length; i++) {
-            for (int j = 0; j < array[0].length; j++) {
-                System.out.print(array[i][j] + " ");
+    public static void counting(int nums[], int start, int mid, int end) {
+        int fp = start;
+        int sp = mid + 1;
+        while (fp <= mid && sp <= end) {
+            if (nums[fp] > 2 * nums[sp]) {
+                count += mid - fp + 1;
+                sp++;
+            } else {
+                fp++;
             }
-            System.out.println();
         }
     }
 
-    public static int[][] merge(int[][] intervals) {
-        List<List<Integer>> mainlist = new ArrayList<>();
-        Arrays.sort(intervals, new Comparator<int[]>() {
-            public int compare(int[] a, int[] b) {
-                return a[0] - b[0];
-            }
-        });
-        for (int i = 0; i < intervals.length; i++) {
-            if (!mainlist.isEmpty() && mainlist.get(mainlist.size() - 1).get(1) >= intervals[i][0]) {
-                int set = Math.max(intervals[i][1], mainlist.get(mainlist.size() - 1).get(1));
-                List<Integer> lst = mainlist.get(mainlist.size() - 1);
-                lst.set(1, set);
-                mainlist.set(mainlist.size() - 1, lst);
+    public static void mergeAndSort(int[] nums, int start, int mid, int end) {
+        int[] temp = new int[end - start + 1];
+        int fp = start;
+        int sp = mid + 1;
+        int k = 0;
+        while (fp <= mid && sp <= end) {
+            if (nums[fp] < nums[sp]) {
+                temp[k] = nums[fp];
+                fp++;
             } else {
-                mainlist.add(Arrays.asList(intervals[i][0], intervals[i][1]));
+                temp[k] = nums[sp];
+                sp++;
             }
+            k++;
+        }
+        while (fp <= mid) {
+            temp[k] = nums[fp];
+            fp++;
+            k++;
+        }
+        while (sp <= end) {
+            temp[k] = nums[sp];
+            sp++;
+            k++;
+        }
+        // copying from temp[] to original[]
+        for (int i = 0, j = start; j <= end; i++, j++) {
+            nums[j] = temp[i];
+        }
+    }
 
+    public static void getReversePair(int[] nums, int start, int end) {
+        // base case
+        if (start >= end) {
+            return;
         }
-        System.out.println(mainlist);
-        int[][] result = new int[mainlist.size()][2];
-        for (int i = 0; i < mainlist.size(); i++) {
-            List<Integer> sublist = mainlist.get(i);
-            for (int j = 0; j < sublist.size(); j++) {
-                result[i][j] = sublist.get(j);
-            }
-        }
-        return result;
+        // Fn call and work
+        int mid = (start + end) / 2;
+        getReversePair(nums, start, mid);
+        getReversePair(nums, mid + 1, end);
+
+        counting(nums, start, mid, end);
+
+        mergeAndSort(nums, start, mid, end);
+
     }
 
     public static void main(String[] args) {
-        // int[][] n = { { 1, 3 }, { 2, 6 }, { 8, 10 }, { 15, 18 } };
-        // int[][] n = { { 1, 4 }, { 4, 5 } };
-        // int[][] n = { { 1, 3 } };
-        int[][] n = { { 1, 4 }, { 0, 2 }, { 3, 5 } };
-        print2dArray(merge(n));
+        int nums[] = { 2, 4, 3, 5, 1 };
+        getReversePair(nums, 0, nums.length - 1);
+        System.out.println(count);
     }
-
 }

@@ -1,44 +1,49 @@
 package Testing;
 
-/**
- * Testing
- */
 public class Testing {
-    public static boolean pair2SumInSortedAndRotated(int nums[], int target) {
-        int left = -1;
-        int right = -1;
-        // get pivot point
-        for (int i = 1; i < nums.length; i++) {
-            if (nums[i - 1] > nums[i]) {
-                left = i;
-                right = i - 1;
+    public boolean isPossible(int bloomDay[], int k, int m, int day) {
+        int count = 0;
+        int bq = 0; // bouquets
+        for (int i = 0; i < bloomDay.length; i++) {
+            if (bloomDay[i] <= day) {
+                count++;
             }
-        }
-        while (left != right) {
-            if (nums[left] + nums[right] > target) {
-                if (right == 0) {
-                    right = nums.length - 1;
-                } else {
-                    right--;
+            if (count == k) {
+                bq++;
+                if (bq == m) {
+                    return true;
                 }
-
-            } else if (nums[left] + nums[right] < target) {
-                if (left == nums.length - 1) {
-                    left = 0;
-                } else {
-                    left++;
-                }
-            } else {
-                return true;
+                count = 0;
+            } else if (bloomDay[i] > day) {
+                count = 0;
             }
         }
         return false;
     }
 
+    public int minDays(int[] bloomDay, int m, int k) { // brute approach
+        // Edge condn
+        if (bloomDay.length < m * k) {
+            return -1;
+        }
+        // Find max Element(Max day of blossom)
+        int maxElem = Integer.MIN_VALUE;
+        int minElem = Integer.MAX_VALUE;
+        for (int i = 0; i < bloomDay.length; i++) {
+            maxElem = Math.max(maxElem, bloomDay[i]);
+            minElem = Math.min(minElem, bloomDay[i]);
+        }
+
+        for (int j = minElem; j <= maxElem; j++) {
+            if (isPossible(bloomDay, k, m, j)) {
+                return j;
+            }
+        }
+        return -1;
+
+    }
+
     public static void main(String[] args) {
-        int nums[] = { 11, 15, 6, 8, 9, 10 };
-        int target = 16;
-        System.out.println(pair2SumInSortedAndRotated(nums, target));
-        ;
+
     }
 }

@@ -32,6 +32,7 @@ public class TwopairSum {
         return false;
     }
 
+    // TC O(n)
     public static boolean pair2SumInSortedAndRotatedWithModulo(int nums[], int target) {
         int left = -1;
         int right = -1;

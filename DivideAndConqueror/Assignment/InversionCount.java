@@ -64,14 +64,14 @@ public class InversionCount {
         getNumberOfInversion(arr, mid + 1, ei);
 
         // call counter
-        counter(arr, si, mid + 1, mid, ei);
+        counter(arr, si, mid + 1, mid, ei); // int arr[], int siF, int siS, int mid, int ei
         // mergesort
         mergeSort(arr, si, ei, mid);
 
     }
 
     public static void main(String[] args) {
-        int nums[] = { 5, 3, 2, 1, 4 };
+        int nums[] = { 2, 4, 1, 3, 5 };
         getNumberOfInversion(nums, 0, nums.length - 1);
         System.out.println(count);
 
