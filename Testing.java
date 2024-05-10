@@ -1,36 +1,41 @@
-
 public class Testing {
-    public static double median(int[] a, int[] b) {
-        int left = 0;
-        int right = 0;
-        double count = 0;
-        double length = Math.ceil((a.length + b.length) / 2.0) - 1;
-        while (left < a.length && right < b.length) {
-            if (count == length) {
-                if ((a.length + b.length) % 2 == 0) {
-                    return (a[left] + b[right]) / 2.0;
-                } else {
-                    if (a.length >= b.length) {
-                        return b[right];
-                    } else {
-                        return a[left];
-                    }
-                }
-            }
-            if (a[left] <= b[right]) {
-                left++;
-            } else {
-                right++;
-            }
-            count++;
+    public static int myAtoi(String s) {
+        int idx = -1;
+        int sign = 1;
+        double num = 0; // will use for reconstruction
+        for (int i = 0; i < s.length() && s.charAt(i) == ' '; i++) { // ignoring leading spaces
+            idx = i;
         }
-        return 0;
+        // checking sign
+        idx++;
+        if (s.length() == 0 || idx == s.length()) {
+            return 0;
+        } else if (s.charAt(idx) == '-') {
+            sign = -1;
+        } else if (s.charAt(idx) == '+') {
+            sign = 1;
+        } else if (s.charAt(idx) >= 48 && s.charAt(idx) <= 57) {
+            idx--;
+        } else {
+            return 0;
+        }
+        // getting numbers
+
+        for (int i = idx + 1; i < s.length() && (s.charAt(i) <= 57 && s.charAt(i) >= 48); i++) {
+            int digit = s.charAt(i) - '0';
+            num = num * 10 + digit;
+        }
+        if (num > Integer.MAX_VALUE) {
+            return sign > 0 ? (int) num * sign : (int) num * sign - 1;
+        }
+        return (int) num * sign;
+
     }
 
     public static void main(String[] args) {
-        int a[] = { 1, 2, 2 };
-        int b[] = { 2, 4, 4 };
-        System.out.println(median(a, b));
-        // median(a, b);
+        String s = "2147483646";
+        System.out.println(myAtoi(s));
+        ;
+
     }
 }

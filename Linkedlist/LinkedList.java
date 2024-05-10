@@ -260,7 +260,7 @@ public class LinkedList {
 
     public static void main(String[] args) {
         LinkedList ll = new LinkedList();
-        // ll.printLL();
+        ll.printLL();
         // ll.AddFirst(2);
         // ll.printLL();
         // ll.AddFirst(1);
