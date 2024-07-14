@@ -1,69 +1,38 @@
-class Testing2 {
-    static int count = 0;
+public class Testing2 {
+    static int sign = 1;
+    static boolean check = true;
 
-    public static void counting(int nums[], int start, int mid, int end) {
-        int fp = start;
-        int sp = mid + 1;
-        while (fp <= mid && sp <= end) {
-            if (nums[fp] > 2 * nums[sp]) {
-                count += mid - fp + 1;
-                sp++;
-            } else {
-                fp++;
-            }
-        }
-    }
-
-    public static void mergeAndSort(int[] nums, int start, int mid, int end) {
-        int[] temp = new int[end - start + 1];
-        int fp = start;
-        int sp = mid + 1;
-        int k = 0;
-        while (fp <= mid && sp <= end) {
-            if (nums[fp] < nums[sp]) {
-                temp[k] = nums[fp];
-                fp++;
-            } else {
-                temp[k] = nums[sp];
-                sp++;
-            }
-            k++;
-        }
-        while (fp <= mid) {
-            temp[k] = nums[fp];
-            fp++;
-            k++;
-        }
-        while (sp <= end) {
-            temp[k] = nums[sp];
-            sp++;
-            k++;
-        }
-        // copying from temp[] to original[]
-        for (int i = 0, j = start; j <= end; i++, j++) {
-            nums[j] = temp[i];
-        }
-    }
-
-    public static void getReversePair(int[] nums, int start, int end) {
+    public static double ImplementAtoi(StringBuilder s, int i) {
         // base case
-        if (start >= end) {
-            return;
+        if (i < 0) {
+            return 0;
         }
-        // Fn call and work
-        int mid = (start + end) / 2;
-        getReversePair(nums, start, mid);
-        getReversePair(nums, mid + 1, end);
+        // fn call and work
+        double ans = ImplementAtoi(s, i - 1);
+        if (!check) {
+            return ans;
+        }
+        double ch = s.charAt(i);
+        if (ch == ' ') {
 
-        counting(nums, start, mid, end);
+        } else if ((ch == '-' || ch == '+') && check) {
+            sign = (ch == '-') ? -1 : 1;
+        } else if (check && (ch <= '9' && ch >= '0')) {
+            ans = ans * 10 + (ch - '0');
+        } else {
+            check = false;
+        }
+        return ans;
+    }
 
-        mergeAndSort(nums, start, mid, end);
+    public static int myAtoi(String s) {
+        StringBuilder str = new StringBuilder(s);
+        double ans = ImplementAtoi(str, s.length() - 1);
 
+        return (int) (ans * sign);
     }
 
     public static void main(String[] args) {
-        int nums[] = { 2, 4, 3, 5, 1 };
-        getReversePair(nums, 0, nums.length - 1);
-        System.out.println(count);
+        System.out.println(myAtoi("0-1"));
     }
 }

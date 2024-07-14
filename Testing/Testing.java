@@ -1,49 +1,61 @@
 package Testing;
 
+import java.util.Stack;
+
+/**
+ * Testing
+ */
 public class Testing {
-    public boolean isPossible(int bloomDay[], int k, int m, int day) {
-        int count = 0;
-        int bq = 0; // bouquets
-        for (int i = 0; i < bloomDay.length; i++) {
-            if (bloomDay[i] <= day) {
-                count++;
-            }
-            if (count == k) {
-                bq++;
-                if (bq == m) {
-                    return true;
-                }
-                count = 0;
-            } else if (bloomDay[i] > day) {
-                count = 0;
-            }
+    public static String multTheString(StringBuilder str, int times) {
+        StringBuilder appendme = new StringBuilder("");
+        for (int i = 0; i < times; i++) {
+            appendme.append(str);
         }
-        return false;
+        return appendme.toString();
     }
 
-    public int minDays(int[] bloomDay, int m, int k) { // brute approach
-        // Edge condn
-        if (bloomDay.length < m * k) {
-            return -1;
-        }
-        // Find max Element(Max day of blossom)
-        int maxElem = Integer.MIN_VALUE;
-        int minElem = Integer.MAX_VALUE;
-        for (int i = 0; i < bloomDay.length; i++) {
-            maxElem = Math.max(maxElem, bloomDay[i]);
-            minElem = Math.min(minElem, bloomDay[i]);
-        }
+    public static String decodeString(String s) { // stack optimum approach
+        Stack<Integer> cnt = new Stack<>();
+        Stack<String> st = new Stack<>();
 
-        for (int j = minElem; j <= maxElem; j++) {
-            if (isPossible(bloomDay, k, m, j)) {
-                return j;
+        for (int i = 0; i < s.length(); i++) {
+            int j = i;
+            int num = 0;
+            while (j < s.length() && (s.charAt(j) >= 48 && s.charAt(j) <= 57)) {
+                num = (num * 10) + (s.charAt(j) - '0');
+                j++;
+            }
+            if (num > 0) {
+                System.out.println(num);
+                cnt.push(num);
+                i = j - 1;
+                continue;
+            }
+            if (s.charAt(i) == ']') {
+                StringBuilder temp = new StringBuilder("");
+                while (!st.isEmpty() && !st.peek().toString().equals("[")) {
+                    temp.insert(0, st.pop());
+                }
+                if (!st.isEmpty()) {
+                    st.pop();
+                }
+                String temps = multTheString(temp, cnt.pop());
+                st.push(temps);
+            } else {
+                st.push(s.charAt(i) + "");
             }
         }
-        return -1;
 
+        StringBuilder ans = new StringBuilder("");
+        while (!st.isEmpty()) {
+            ans.insert(0, st.pop());
+        }
+        return ans.toString();
     }
 
     public static void main(String[] args) {
-
+        String str = "100[leetcode]";
+        System.out.println(decodeString(str));
+        ;
     }
 }
